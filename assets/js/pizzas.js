@@ -6,7 +6,7 @@ let pizzaJson = [
         img:'assets/images/pizza1.png', 
         price:20.19, 
         sizes:['100g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Molho de tomate e mussarela (2 camadas)'
     },
 
     {
@@ -15,7 +15,7 @@ let pizzaJson = [
         img:'assets/images/pizza2.png', 
         price:18.00, 
         sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Molho de tomate, mussarela e calabresa'
     },
 
     {
@@ -24,7 +24,7 @@ let pizzaJson = [
         img:'assets/images/pizza3.png', 
         price:17.45, 
         sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Molho de tomate, mussarela, provolone, parmesão e catupiry'
     },
 
     {
@@ -33,7 +33,7 @@ let pizzaJson = [
         img:'assets/images/pizza4.png', 
         price:19.77, 
         sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Molho de tomate, mussarela, bacon, calabresa, ovos e cebola'
     },
 
     {
@@ -41,7 +41,7 @@ let pizzaJson = [
         name:'Sorvete', 
         img:'assets/images/pizza5.png', 
         price:21.43, sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Chocolate ao leite e bolas de sorvete'
     },
 
     {
@@ -50,7 +50,7 @@ let pizzaJson = [
         img:'assets/images/pizza6.png', 
         price:18.55, 
         sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Molho de tomate, presunto, milho, ervilha, calabresa, tomates, ovos, azeitonas e mussarela (2 camadas)'
     },
 
     {
@@ -59,6 +59,6 @@ let pizzaJson = [
         img:'assets/images/pizza7.png', 
         price:22.36, 
         sizes:['320g', '530g', '860g'], 
-        description:'Descrição da pizza em mais de uma linha muito legal bem interessante'
+        description:'Creme de leite, chocolate ao leite e fios de bisnaga'
     }
 ];
