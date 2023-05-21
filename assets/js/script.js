@@ -1,9 +1,14 @@
+
+let modalQt = 1;
+
 //Selection FUNCTIONS
 const c = function(el) {
+    //document.querySelector() returns a list with the FIRST ELEMENT equal to the selector.
     return document.querySelector(el);
 }
 
 const cs = function(el) {
+    //document.querySelectorAll() returns a list with ALL ELEMENTS equal to the selector.
     return document.querySelectorAll(el);
 }
 
@@ -29,19 +34,38 @@ pizzaJson.map(function(item, index) {
 
     //Executing function 'function(e) { }' when clicking <a> tag.
     pizzaItem.querySelector('a').addEventListener('click', function(e) {
+        //The preventDefault() method cancels the default behavior of an element.
         e.preventDefault();
 
-        //'Event.target' references the element that fired the event.
-        //'Method.closest()' returns the closest ancestor, relative to the current element, that has the provided selector as a parameter.
-        /* 
-         - ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
+        /*
+        01) 'Event.target' references the element that fired the event.
+        02) 'Method.closest()' returns the closest ancestor, relative to the current element, that has the provided selector as a parameter. 
+        03) ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
         */
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
 
-        //Filling in the information of <div class="pizzaInfo">.
+        modalQt = 1;
+
+        //Filling in the information of <div class="pizzaWindowArea">.
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
-        c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
         c('.pizzaBig img').src = pizzaJson[key].img;
+        c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
+        c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
+        c('.pizzaInfo--qt').innerHTML = modalQt;
+        c('.pizzaInfo--size.selected').classList.remove('selected');
+
+        /* 
+        01) The forEach() method executes a callback function for each array element.
+        */
+        cs('.pizzaInfo--size').forEach( function(size, sizeIndex) {
+            if(sizeIndex == 2) {
+                size.classList.add('selected');
+            }
+
+            size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
+        });
+
+        
 
         //Changing the CSS to show the content of '.pizzaWindowArea' and setting the animation.
         c('.pizzaWindowArea').style.display = 'flex';
@@ -50,7 +74,6 @@ pizzaJson.map(function(item, index) {
             c('.pizzaWindowArea').style.opacity = 1;
         }, 200);
     });
-    
 
     //Adding 'pizza-item' in 'pizza-area'.
     c('.pizza-area').append(pizzaItem);
