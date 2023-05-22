@@ -128,13 +128,26 @@ cs('.pizzaInfo--size').forEach(function(size, sizeIndex) {
 c('.pizzaInfo--addButton').addEventListener('click', function() {
     let size = c('.pizzaInfo--size.selected').getAttribute('data-key');
 
-    cart.push(
-        {
-            id: pizzaJson[modalKey].id,
-            size,
-            qt:modalQt
-        }
-    );
+    //Generating an identifier for each order.
+    let identifier = pizzaJson[modalKey].id + '+' + size;
 
+    //Adding pizzas to the cart ARRAY.
+    let key = cart.findIndex(function(item) {
+        return item.identifier == identifier;
+    });
+
+    if(key > -1) {
+        cart[key].qt += modalQt;
+    } else {
+        cart.push(
+            {
+                id: pizzaJson[modalKey].id,
+                size,
+                qt: modalQt
+            }
+        );
+    }
+    
+    closeModal();
 });
 
