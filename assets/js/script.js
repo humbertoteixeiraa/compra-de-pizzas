@@ -126,21 +126,33 @@ cs('.pizzaInfo--size').forEach(function(size, sizeIndex) {
 
 //ADD PIZZA TO CART BUTTON
 c('.pizzaInfo--addButton').addEventListener('click', function() {
+
+    //Getting the 'data-key' value of the selected pizza.
     let size = c('.pizzaInfo--size.selected').getAttribute('data-key');
 
-    //Generating an identifier for each order.
-    let identifier = pizzaJson[modalKey].id + '+' + size;
+    //Generating an identifier for each order (PIZZA ID + @ + PIZZA SIZE).
+    let identifier = pizzaJson[modalKey].id + '@' + size;
 
-    //Adding pizzas to the cart ARRAY.
+    //Checking if the identifier just created already exists in the ARRAY cart.
     let key = cart.findIndex(function(item) {
         return item.identifier == identifier;
+        /* 
+         01) OPERATION THE FUNCTION:
+            a) Each pizza order receives an identifier called 'identifier';
+            b) The 'key' variable receives the result of the findIndex() method;
+            c) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
+            d) The callback function tests whether the newly created identifier already exists in any item of the 'cart' ARRAY;
+            e) If it exists, it returns the value of the element's index. If it does not exist, it returns the value -1.
+        */
     });
 
+    //Checking and adding pizzas to the ARRAY cart.
     if(key > -1) {
         cart[key].qt += modalQt;
     } else {
         cart.push(
             {
+                identifier,
                 id: pizzaJson[modalKey].id,
                 size,
                 qt: modalQt
@@ -148,6 +160,12 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
         );
     }
     
+    updateCart()
     closeModal();
+    console.log(cart);
 });
+
+function updateCart() {
+    
+}
 
