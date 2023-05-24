@@ -149,7 +149,9 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
     //Checking and adding pizzas to the ARRAY cart.
     if(key > -1) {
         cart[key].qt += modalQt;
+        //If the identifier already exists, add the number of pizzas in the 'modalQt' to 'cart.qt'.
     } else {
+        //If it does not exist, the pizza is added to the ARRAY cart.
         cart.push(
             {
                 identifier,
@@ -162,10 +164,17 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
     
     updateCart()
     closeModal();
+
+    //ATTENTION! -> Remove later.
     console.log(cart);
 });
 
+//SHOWING THE SHOPPING CART
 function updateCart() {
-    
+    if(cart.length > 0) {
+        c('aside').classList.add('show');
+    } else {
+        c('aside').classList.remove('show');
+    }
 }
 
