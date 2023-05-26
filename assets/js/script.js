@@ -173,8 +173,26 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
 function updateCart() {
     if(cart.length > 0) {
         c('aside').classList.add('show');
+
+        for (let i in cart) {
+            let pizzaItem = pizzaJson.find(function(item) {
+                return item.id = cart[i].id;
+                /* 
+                01) OPERATION THE FUNCTION:
+                    a) Each pizza order receives an identifier called 'identifier';
+                    b) The 'key' variable receives the result of the findIndex() method;
+                    c) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
+                    d) The callback function tests whether the newly created identifier already exists in any item of the 'cart' ARRAY;
+                    e) If it exists, it returns the value of the element's index. If it does not exist, it returns the value -1.
+                */
+            });
+
+            console.log(pizzaItem);
+        }
+
     } else {
         c('aside').classList.remove('show');
+
     }
 }
 
