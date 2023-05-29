@@ -164,9 +164,6 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
     
     updateCart()
     closeModal();
-
-    //ATTENTION! -> Remove later.
-    console.log(cart);
 });
 
 //SHOWING THE SHOPPING CART
@@ -177,15 +174,16 @@ function updateCart() {
 
         for (let i in cart) {
             let pizzaItem = pizzaJson.find(function(item) {
-                return item.id = cart[i].id;
+                return item.id == cart[i].id;
                 /* 
                 01) OPERATION THE FUNCTION:
-                    a) The 'pizzaItem' variable receives the result of the pizzaJson.findIndex();
+                    a) The 'pizzaItem' variable receives the result of the pizzaJson.find();
                     b) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
+                    c) The callback function will return the complete item from the ARRAY 'pizzaJson' that has the same id as the id of the cart item.
                 */
             });
 
-            console.log(pizzaItem);
+            console.log('pizzaItem: ', pizzaItem);
         }
 
     } else {
