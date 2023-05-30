@@ -172,9 +172,12 @@ function updateCart() {
         //Displays the cart if there is any pizza in it.
         c('aside').classList.add('show');
 
+        //Resetting cart elements list before loading elements
+        c('.cart').innerHTML = '';
+
         for (let i in cart) {
-            let pizzaItem = pizzaJson.find(function(item) {
-                return item.id == cart[i].id;
+            let pizzaItem = pizzaJson.find(function(itemPizzaJson) {
+                return itemPizzaJson.id == cart[i].id;
                 /* 
                 01) OPERATION THE FUNCTION:
                     a) The 'pizzaItem' variable receives the result of the pizzaJson.find();
@@ -183,7 +186,33 @@ function updateCart() {
                 */
             });
 
-            console.log('pizzaItem: ', pizzaItem);
+            //Cloning elements.
+            let cartItem = c('.models .cart--item').cloneNode(true);
+
+            //Filling in the information of <div class="cart--item">.
+            cartItem.querySelector('img').src = pizzaItem.img;
+            
+            let pizzaSizeName;
+
+            switch(cart[i].size) {
+                case '0':
+                    pizzaSizeName = 'P';
+                    break;
+                case '1':
+                    pizzaSizeName = 'M';
+                    break;
+                case '2':
+                    pizzaSizeName = 'G';
+                    break;
+            }
+            //console.log(pizzaSizeName);
+
+            let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
+            cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
+            
+
+            //Inserting elements at the end.
+            c('.cart').append(cartItem);
         }
 
     } else {
