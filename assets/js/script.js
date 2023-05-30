@@ -1,4 +1,4 @@
-
+//VARIABLES
 let cart = [];
 let modalQt = 1;
 let modalKey = 0;
@@ -175,6 +175,12 @@ function updateCart() {
         //Resetting cart elements list before loading elements
         c('.cart').innerHTML = '';
 
+        //VARIABLES
+        let subtotal = 0;
+        let desconto = 0;
+        let total = 0;
+        
+
         for (let i in cart) {
             let pizzaItem = pizzaJson.find(function(itemPizzaJson) {
                 return itemPizzaJson.id == cart[i].id;
@@ -186,6 +192,9 @@ function updateCart() {
                 */
             });
 
+            //Calculating the subtotal.
+            subtotal = subtotal + (pizzaItem.price * cart[i].qt);
+
             //Cloning elements.
             let cartItem = c('.models .cart--item').cloneNode(true);
 
@@ -193,7 +202,6 @@ function updateCart() {
             cartItem.querySelector('img').src = pizzaItem.img;
             
             let pizzaSizeName;
-
             switch(cart[i].size) {
                 case '0':
                     pizzaSizeName = 'P';
@@ -204,16 +212,44 @@ function updateCart() {
                 case '2':
                     pizzaSizeName = 'G';
                     break;
-            }
-            //console.log(pizzaSizeName);
-
+            };
             let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
             cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
+
+            cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
             
+            cartItem.querySelector('.cart--item-qtmenos').addEventListener('click', function() {
+                if(cart[i].qt > 1) {
+                    cart[i].qt--;
+                } else {
+                    cart.splice(i, 1);
+                }
+
+                updateCart();
+            });
+
+            cartItem.querySelector('.cart--item-qtmais').addEventListener('click', function() {
+                cart[i].qt++;
+
+                updateCart();
+            });
+
 
             //Inserting elements at the end.
             c('.cart').append(cartItem);
         }
+
+        //Calculating the desconto and total
+        desconto = subtotal * 0.1;
+        total = subtotal - desconto;
+
+        //Filling in the information of <div class="cart--details">.
+        c('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
+        c('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
+        c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
+
+        //Displaying the quantity of item in the cart on the mobile version of the website.
+        c('.menu-openner span').innerHTML = cart.length;
 
     } else {
         //Does not display the cart if there is no pizza in it.
