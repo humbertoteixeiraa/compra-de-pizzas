@@ -1,4 +1,4 @@
-//Array of objects: 
+//ARRAY OF OBJECTS
 let pizzaJson = [
     {
         id:1, 

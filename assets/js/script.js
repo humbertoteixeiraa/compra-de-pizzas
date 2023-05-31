@@ -3,25 +3,22 @@ let cart = [];
 let modalQt = 1;
 let modalKey = 0;
 
-//Selection FUNCTIONS
+//SELECTION FUNCTIONS
 function c(el) {
-    //document.querySelector() returns a list with the FIRST ELEMENT equal to the selector.
     return document.querySelector(el);
 }
 
 const cs = function(el) {
-    //document.querySelectorAll() returns a list with ALL ELEMENTS equal to the selector.
     return document.querySelectorAll(el);
 }
 
-/**/
+ 
+//01) --> LOADING THE PIZZA LIST <-- 
 
-/* 
- 01) --> LOADING THE PIZZA LIST <--
- 02) Calling the .map() function on the array of 'pizzaJson' objects.
- 03) 'item' is each array object. 
-*/
 pizzaJson.map(function(item, index) {
+    //01) OPERATION THE FUNCTION:
+    //a) Calling the .map() function on the array of 'pizzaJson' objects.
+    //b) 'item' is each object of ARRAY 'pizza Json'.
 
     //Copying the complete structure with .cloneNode().
     let pizzaItem = c('.models .pizza-item').cloneNode(true);
@@ -30,12 +27,34 @@ pizzaJson.map(function(item, index) {
     pizzaItem.setAttribute('data-key', index);
     //Adding pizza images.
     pizzaItem.querySelector('.pizza-item--img img').src = item.img;
-    //Replacing pizza price.
+    //Adding pizza price.
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`;
-    //Replacing pizza names.
+    //Adding pizza names.
     pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
-    //Replacing pizza description.
+    //Adding pizza description.
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
+
+
+
+
+
+
+
+
+
+    /* CONTINUAR DAQUI !!! */
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* 
      01) --> OPENING THE MODAL <--
