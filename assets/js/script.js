@@ -167,7 +167,21 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
 });
 
 //SHOWING THE SHOPPING CART
+
+//Opening the mobile menu.
+c('.menu-openner').addEventListener('click', function() {
+    if(cart.length > 0) {
+        c('aside').style.left = '0';
+    };
+});
+
+//Closing the mobile menu.
+c('.menu-closer').addEventListener('click', function() {
+    c('aside').style.left = '100vw';
+});
+
 function updateCart() {
+    //Displays the cart if there is pizza in it.
     if(cart.length > 0) {
         //Displays the cart if there is any pizza in it.
         c('aside').classList.add('show');
@@ -223,8 +237,11 @@ function updateCart() {
                     cart[i].qt--;
                 } else {
                     cart.splice(i, 1);
+
+                    c('.menu-openner span').innerHTML = cart.length;
                 }
 
+                
                 updateCart();
             });
 
@@ -254,7 +271,7 @@ function updateCart() {
     } else {
         //Does not display the cart if there is no pizza in it.
         c('aside').classList.remove('show');
-
+        c('aside').style.left = '100vw'; //Mobile cart.
     }
 }
 
