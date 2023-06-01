@@ -16,63 +16,39 @@ const cs = function(el) {
 //01) --> LOADING THE PIZZA LIST <-- 
 
 pizzaJson.map(function(item, index) {
-    //01) OPERATION THE FUNCTION:
-    //a) Calling the .map() function on the array of 'pizzaJson' objects.
+    //OPERATION THE FUNCTION:
+    //a) Calling the .map() function on the array of 'pizzaJson' objects;
     //b) 'item' is each object of ARRAY 'pizza Json'.
 
     //Copying the complete structure with .cloneNode().
     let pizzaItem = c('.models .pizza-item').cloneNode(true);
 
-    //Adding 'data-key' attribute in the 'pizaItem' class.
+    //Filling in the information of <div class="pizza-area">.
     pizzaItem.setAttribute('data-key', index);
-    //Adding pizza images.
     pizzaItem.querySelector('.pizza-item--img img').src = item.img;
-    //Adding pizza price.
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`;
-    //Adding pizza names.
     pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
-    //Adding pizza description.
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
 
 
 
 
-
-
-
-
-
-    /* CONTINUAR DAQUI !!! */
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* 
-     01) --> OPENING THE MODAL <--
-     02) Executing function 'function(e) { }' when clicking <a> tag.
-    */
+    
+    //02) --> OPENING THE MODAL FOR EACH PIZZA <--
+    //a) 'function(e) { }' is executed when clicking on the <a> tag of class="pizza-item".
+    
     pizzaItem.querySelector('a').addEventListener('click', function(e) {
         //The preventDefault() method cancels the default behavior of an element.
         e.preventDefault();
 
-        /*
-         01) 'Event.target' references the element that fired the event.
-         02) 'Method.closest()' returns the closest ancestor, relative to the current element, that has the provided selector as a parameter. 
-         03) ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
-        */
+        //ATENTTION !!!
+        //a) 'Event.target' references the element that fired the event.
+        //b) The '.closest()' method finds the closest parent element that satisfies the selector condition.
+        //c) ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
 
-        modalQt = 1;
         modalKey = key;
+        modalQt = 1;
 
         //Filling in the information of <div class="pizzaWindowArea">.
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
@@ -82,9 +58,7 @@ pizzaJson.map(function(item, index) {
         c('.pizzaInfo--qt').innerHTML = modalQt;
         c('.pizzaInfo--size.selected').classList.remove('selected');
 
-        /* 
-         01) The forEach() method executes a callback function for each array element.
-        */
+        //The forEach() method executes a callback function for each array element.
         cs('.pizzaInfo--size').forEach( function(size, sizeIndex) {
             if(sizeIndex == 2) {
                 size.classList.add('selected');
@@ -98,12 +72,25 @@ pizzaJson.map(function(item, index) {
         c('.pizzaWindowArea').style.opacity = 0;
         setTimeout(function() {
             c('.pizzaWindowArea').style.opacity = 1;
-        }, 200);
+        }, 100);
     });
 
-    //Adding 'pizza-item' in 'pizza-area'.
+    //ATENTTION !!! -> Adding <div class='pizza-item'< in <div class='pizza-area'>.
     c('.pizza-area').append(pizzaItem);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 
  01) --> MODAL EVENTS <--
