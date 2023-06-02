@@ -117,23 +117,6 @@ cs('.pizzaInfo--size').forEach(function(size, sizeIndex) {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //ADD PIZZA TO CART BUTTON
 c('.pizzaInfo--addButton').addEventListener('click', function() {
 
@@ -146,19 +129,17 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
     //Checking if the identifier just created already exists in the ARRAY cart.
     let key = cart.findIndex(function(item) {
         return item.identifier == identifier;
-        /* 
-         01) OPERATION THE FUNCTION:
-            a) Each pizza order receives an identifier called 'identifier';
-            b) The 'key' variable receives the result of the findIndex() method;
-            c) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
-            d) The callback function tests whether the newly created identifier already exists in any item of the 'cart' ARRAY;
-            e) If it exists, it returns the value of the element's index. If it does not exist, it returns the value -1.
-        */
+        //OPERATION THE FUNCTION:
+        //a) Each pizza order receives an identifier called 'identifier';
+        //b) The 'key' variable receives the result of the findIndex() method;
+        //c) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
+        //d) The callback function tests whether the newly created identifier already exists in any item of the 'cart' ARRAY;
+        //e) If it EXISTS, it returns the value of the element's index. If it does NOT EXIST, it returns the value -1.
     });
 
     //Checking and adding pizzas to the ARRAY cart.
     if(key > -1) {
-        cart[key].qt += modalQt;
+        cart[key].qt = cart[key].qt + modalQt;
         //If the identifier already exists, add the number of pizzas in the 'modalQt' to 'cart.qt'.
     } else {
         //If it does not exist, the pizza is added to the ARRAY cart.
@@ -176,7 +157,7 @@ c('.pizzaInfo--addButton').addEventListener('click', function() {
     closeModal();
 });
 
-//SHOWING THE SHOPPING CART
+//04) --> SHOWING THE SHOPPING CART <--
 
 //Opening the mobile menu.
 c('.menu-openner').addEventListener('click', function() {
@@ -190,13 +171,14 @@ c('.menu-closer').addEventListener('click', function() {
     c('aside').style.left = '100vw';
 });
 
+//Updating the cart.
 function updateCart() {
-    //Displays the cart if there is pizza in it.
+    //Displays the cart ARRAY if there is pizza in it.
     if(cart.length > 0) {
         //Displays the cart if there is any pizza in it.
         c('aside').classList.add('show');
 
-        //Resetting cart elements list before loading elements
+        //Resetting cart elements list.
         c('.cart').innerHTML = '';
 
         //VARIABLES
@@ -208,12 +190,11 @@ function updateCart() {
         for (let i in cart) {
             let pizzaItem = pizzaJson.find(function(itemPizzaJson) {
                 return itemPizzaJson.id == cart[i].id;
-                /* 
-                01) OPERATION THE FUNCTION:
-                    a) The 'pizzaItem' variable receives the result of the pizzaJson.find();
-                    b) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
-                    c) The callback function will return the complete item from the ARRAY 'pizzaJson' that has the same id as the id of the cart item.
-                */
+                //OPERATION THE FUNCTION:
+                //a) The 'pizzaItem' variable receives the result of the pizzaJson.find();
+                //b) The findIndex() method traverses the entire 'cart' ARRAY and executes a callback function;
+                //c) The callback function will return the complete item from the ARRAY 'pizzaJson' that has the same id as the id of the cart item.
+                //d) WHY? The function is executed to get all the pizza data from the cart in the ARRAY 'pizzaJson' and store it in the VARIABLE 'pizzaItem'.
             });
 
             //Calculating the subtotal.
@@ -237,6 +218,7 @@ function updateCart() {
                     pizzaSizeName = 'G';
                     break;
             };
+
             let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
             cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
 
@@ -285,3 +267,4 @@ function updateCart() {
     }
 }
 
+//END!
