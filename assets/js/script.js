@@ -33,7 +33,7 @@ pizzaJson.map(function(item, index) {
 
 
 
-    
+
     //02) --> OPENING THE MODAL FOR EACH PIZZA <--
     //a) 'function(e) { }' is executed when clicking on the <a> tag of class="pizza-item".
     
@@ -44,10 +44,12 @@ pizzaJson.map(function(item, index) {
         //ATENTTION !!!
         //a) 'Event.target' references the element that fired the event.
         //b) The '.closest()' method finds the closest parent element that satisfies the selector condition.
-        //c) ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
 
+        //ATTENTION! -> Seria possível utilizar 'let key = index', já que o valor de 'key' é o mesmo de 'index'. NO ENTANTO, caso seja necessário refatorar esse código e extrair a função adicionada ao .addEventListener() para fora de.map(), seria perfeitamente possível já que ela não depende de informações de fora dela.
         modalKey = key;
+
+        //Default quantity of pizzas shown when opening the modal.
         modalQt = 1;
 
         //Filling in the information of <div class="pizzaWindowArea">.
@@ -83,30 +85,15 @@ pizzaJson.map(function(item, index) {
 
 
 
-
-
-
-
-
-
-
-
-
-/* 
- 01) --> MODAL EVENTS <--
-*/
+//03) --> MODAL EVENTS FOR EACH PIZZA <--
 function closeModal() {
     c('.pizzaWindowArea').style.opacity = 0;
     setTimeout(function() {
         c('.pizzaWindowArea').style.display = 'none';
-    }, 500);
-
+    }, 100);
 }
 
-/* 
- 01) CANCEL BUTTONS
- 02) ATTENTON !!! -> Code different from the code made in class (Compra de Pizzas - Parte 07 - 1:54)
-*/
+// CANCEL BUTTONS
 c('.pizzaInfo--cancelButton').addEventListener('click', closeModal);
 c('.pizzaInfo--cancelMobileButton').addEventListener('click', closeModal);
 
@@ -129,6 +116,23 @@ cs('.pizzaInfo--size').forEach(function(size, sizeIndex) {
         size.classList.add('selected');
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //ADD PIZZA TO CART BUTTON
 c('.pizzaInfo--addButton').addEventListener('click', function() {
