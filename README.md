@@ -1,2 +1,3 @@
-# compra-de-pizzas
- Projeto de um site de pizzaria criado durante o curso de Javascript da B7Web.
+# pizzeria
+* Objective: work with request and API concepts with JavaScript.
+* Technologies used: HTML5, CSS3 and JavaScript.
